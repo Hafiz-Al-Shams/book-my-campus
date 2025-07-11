@@ -1,7 +1,8 @@
-import Link from 'next/link';
 import React from 'react';
 
-const CollegesPage = () => {
+const CollegeDetailPage = async ({ params }) => {
+
+
 
     const data = [
         {
@@ -116,23 +117,19 @@ const CollegesPage = () => {
         },
     ];
 
+    const { id } = await params;
+
+    const singleData = data.find((d) => d._id == id);
+
 
     return (
         <div>
-            <h2 className='text-5xl font-bold'>Colleges Page Here</h2>
-            {
-                data.map((d) => {
-                    return (
-                        <div className="space-y-10" key={d._id}>
-                            <Link href={`/colleges/${d._id}`}>
-                                <img src={d.imgSrc} alt="" className="my-10" />
-                            </Link>
-                        </div>
-                    )
-                })
-            }
+            <h1 className="text-center bg-amber-200 text-3xl">College Detail Page</h1>
+            <p className="text-xl">ID: {id}</p>
+            <p className="text-xl"> {singleData.name}</p>
+            <img src={singleData.imgSrc} alt="" />
         </div>
     );
 };
 
-export default CollegesPage;
+export default CollegeDetailPage;
