@@ -31,7 +31,7 @@ const NavBar = () => {
                     {/* Logo Section */}
                     <Link href="/">
                         <div className="flex items-center lg:space-x-0.5 cursor-pointer">
-                            <img src="/img_1.png" alt="" />
+                            <img src="/img_1.png" alt="" className="w-12" />
                             <span className="hidden md:flex text-xl font-semibold text-gray-800 hover:text-blue-700">BookMyCampus</span>
                         </div>
                     </Link>
