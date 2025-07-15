@@ -43,7 +43,7 @@ const NavBar = () => {
                                 pathName.includes('colleges') ?
                                     <li className="bg-blue-500/90 text-white cursor-pointer font-medium px-4 py-2 rounded-lg hover:bg-blue-600/90 transition-colors">Colleges</li>
                                     :
-                                    <li className="text-gray-600 font-medium hover:text-blue-600 cursor-pointer border-2 px-2.5 py-1.5 border-gray-300 rounded-sm">Colleges</li>
+                                    <li className="text-gray-600 font-medium hover:text-blue-600 cursor-pointer border-2 px-2.5 py-1.5 border-gray-200 rounded-md">Colleges</li>
                             }
                         </Link>
                         <Link href="/admission">
@@ -52,11 +52,11 @@ const NavBar = () => {
                                 pathName.includes('admission') ?
                                     <li className="bg-blue-500/90 text-white cursor-pointer font-medium px-4 py-2 rounded-lg hover:bg-blue-600/90 transition-colors">Admission</li>
                                     :
-                                    <li className="text-gray-600 font-medium hover:text-blue-600 cursor-pointer border-2 px-2.5 py-1.5 border-gray-300 rounded-md">Admission</li>
+                                    <li className="text-gray-600 font-medium hover:text-blue-600 cursor-pointer border-2 px-2.5 py-1.5 border-gray-200 rounded-md">Admission</li>
                             }
                         </Link>
                         <Link href="/user-dashboard/my-college">
-                            <li className="text-gray-600 font-medium hover:text-blue-600 cursor-pointer border-2 px-2.5 py-1.5 border-gray-300 rounded-md">My College</li>
+                            <li className="text-gray-600 font-medium hover:text-blue-600 cursor-pointer border-2 px-2.5 py-1.5 border-gray-200 rounded-md">My College</li>
                         </Link>
                     </ul>
 
@@ -69,7 +69,7 @@ const NavBar = () => {
                                         Login
                                     </button>
                                     :
-                                    <button className="text-gray-600 font-medium hover:text-blue-600 px-4 py-1.5 cursor-pointer border-2 p-1 border-gray-300 rounded-md">
+                                    <button className="text-gray-600 font-medium hover:text-blue-600 px-4 py-1.5 cursor-pointer border-2 p-1 border-gray-200 rounded-md">
                                         Login
                                     </button>
                             }
@@ -83,7 +83,7 @@ const NavBar = () => {
                                     </button>
                                     :
 
-                                    <button className="text-gray-600 font-medium hover:text-blue-600 px-4 py-1.5 cursor-pointer border-2 p-1 border-gray-300 rounded-md">
+                                    <button className="text-gray-600 font-medium hover:text-blue-600 px-4 py-1.5 cursor-pointer border-2 p-1 border-gray-200 rounded-md">
                                         Sign Up
                                     </button>
                             }

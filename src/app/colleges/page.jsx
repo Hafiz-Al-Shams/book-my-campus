@@ -1,9 +1,10 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 
 
 export const getColleges = async () => {
-    const res = await fetch('http://localhost:5000/colleges')
+    const res = await fetch('https://book-my-campus-server.onrender.com/colleges')
     const data = await res.json();
     return data;
 }
@@ -136,7 +137,8 @@ const CollegesPage = async () => {
                     return (
                         <div className="space-y-10" key={d._id}>
                             <Link href={`/colleges/${d._id}`}>
-                                <img src={d.imgSrc} alt="" className="my-10" />
+                                {/* <img src={d.imgSrc} alt="" className="my-10" /> */}
+                                <Image src={d.imgSrc} alt="" className="my-10 w-auto h-auto" width={50} height={50} />
                             </Link>
                         </div>
                     )

@@ -2,7 +2,7 @@
 
 
 export const getSingleCollege = async (college_id) => {
-    const res = await fetch(`http://localhost:5000/colleges/${college_id}`)
+    const res = await fetch(`https://book-my-campus-server.onrender.com/colleges/${college_id}`)
     const data = await res.json();
     return data;
 }
