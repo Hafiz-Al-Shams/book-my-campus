@@ -42,7 +42,8 @@ const AddReviewForm = ({ submission, submissionId }) => {
         };
 
         try {
-            const res = await fetch("http://localhost:5000/reviews", {
+            // const res = await fetch("http://localhost:5000/reviews", {
+            const res = await fetch("https://book-my-campus-server.onrender.com/reviews", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(reviewPayload),
@@ -53,7 +54,10 @@ const AddReviewForm = ({ submission, submissionId }) => {
                 toast.success("Review submitted! Thank you.");
                 setRating("");
                 setFeedback("");
-                router.push("/");
+                // wait 2s (or whatever your autoClose is) before navigating
+                setTimeout(() => {
+                    router.push("/");
+                }, 1600);
             } else {
                 throw new Error(data.error || "Failed to submit review");
             }

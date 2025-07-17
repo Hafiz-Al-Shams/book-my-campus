@@ -3,7 +3,8 @@ import AddReviewForm from "../components/AddReviewForm";
 
 // single submission data will be loaded via _id
 export const getSingleSubmission = async (submission_id) => {
-    const res = await fetch(`http://localhost:5000/submissions/${submission_id}`)
+    // const res = await fetch(`http://localhost:5000/submissions/${submission_id}`)
+    const res = await fetch(`https://book-my-campus-server.onrender.com/submissions/${submission_id}`)
     const data = await res.json();
     return data;
 }

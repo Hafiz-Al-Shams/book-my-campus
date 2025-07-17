@@ -1,5 +1,6 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
@@ -9,6 +10,7 @@ const SingleCollegeAdmissionPage = () => {
 
     const { id } = useParams();
     const router = useRouter();
+    const { data: session, status } = useSession();
 
     const [college, setCollege] = useState(null);
     const [form, setForm] = useState({
@@ -21,10 +23,12 @@ const SingleCollegeAdmissionPage = () => {
         image: null,
     });
 
-    // Load college data
+    // Load college data with no cache
     useEffect(() => {
         if (!id) return;
-        fetch(`https://book-my-campus-server.onrender.com/colleges/${id}`)
+        fetch(`https://book-my-campus-server.onrender.com/colleges/${id}`, {
+            cache: "no-store",
+        })
             .then((res) => res.json())
             .then(setCollege)
             .catch(console.error);
@@ -80,13 +84,15 @@ const SingleCollegeAdmissionPage = () => {
 
             const photoUrl = imgbbJson.data.display_url;
 
-            // 2️⃣ Build payload including collegeName & collegeImgSrc
+            // 2️⃣ Build payload
             const payload = {
                 collegeId: id,
-                collegeName: college.name,             // ← ADDED: captures college.name
-                collegeImgSrc: college.imgSrc,         // ← ADDED: captures college.imgSrc
-                name: form.name,
-                email: form.email,
+                collegeName: college.name,
+                collegeImgSrc: college.imgSrc,
+                // name: form.name,
+                name: session?.user?.name,
+                // email: form.email,
+                email: session?.user?.email,
                 program: form.program,
                 phone: form.phone,
                 address: form.address,
@@ -96,8 +102,7 @@ const SingleCollegeAdmissionPage = () => {
 
             // 3️⃣ Send all data to your backend
             const res = await fetch(
-                // "https://book-my-campus-server.onrender.com/submissions",
-                "http://localhost:5000/submissions",
+                "https://book-my-campus-server.onrender.com/submissions",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -111,7 +116,7 @@ const SingleCollegeAdmissionPage = () => {
                 resetForm();
                 setTimeout(() => {
                     router.push("/user-dashboard/my-college");
-                }, 500);
+                }, 1600);
             } else {
                 throw new Error(result.error || "Submission failed");
             }
@@ -151,8 +156,10 @@ const SingleCollegeAdmissionPage = () => {
                         id="name"
                         name="name"
                         type="text"
-                        placeholder="John Wick"
-                        value={form.name}
+                        defaultValue={session?.user?.name || ""}
+                        // placeholder="John Wick"
+                        // value={form.name}
+                        // value={session?.user?.name || ""}
                         onChange={handleChange}
                         className="w-full border px-3 py-2 rounded-lg"
                         required
@@ -168,8 +175,10 @@ const SingleCollegeAdmissionPage = () => {
                         id="email"
                         name="email"
                         type="email"
-                        placeholder="john.wick@example.com"
-                        value={form.email}
+                        defaultValue={session?.user?.email || ""}
+                        // placeholder="john.wick@example.com"
+                        // value={form.email}
+                        // value={session?.user?.email}
                         onChange={handleChange}
                         className="w-full border px-3 py-2 rounded-lg"
                         required

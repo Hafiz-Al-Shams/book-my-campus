@@ -6,7 +6,7 @@ const DashBoardLayout = ({ children }) => {
 
             <div className="grid grid-cols-12">
                 {/* side navbar */}
-                <div className="col-span-3 border-2 border-gray-300">
+                <div className="col-span-2 border-2 border-gray-300">
                     <ul>
                         <li>profile</li>
                         <li>settings</li>
@@ -15,7 +15,7 @@ const DashBoardLayout = ({ children }) => {
                 </div>
 
                 {/* dashboard content */}
-                <div className="col-span-9 border-2 border-gray-300">
+                <div className="col-span-10 border-2 border-gray-300">
                     {children}
 
                 </div>
