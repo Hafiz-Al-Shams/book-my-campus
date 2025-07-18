@@ -1,14 +1,12 @@
 import React from 'react';
 import LoginFrom from './components/LoginForm';
-import SocialLogin from './components/SocialLogin';
 
 const LoginPage = () => {
     return (
-        <div>
-            <h1>Login page here</h1>
+        <div className='mt-12 md:mt-16 lg:mt-24 mb-8 md:mb-10 lg:mb-24'>
             <LoginFrom></LoginFrom>
-            <hr />
-            <SocialLogin></SocialLogin>
+            {/* <hr /> */}
+            {/* <SocialLogin></SocialLogin> */}
         </div>
     );
 };

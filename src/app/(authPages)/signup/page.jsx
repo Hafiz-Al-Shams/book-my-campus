@@ -1,16 +1,14 @@
-import SocialLogin from "../login/components/SocialLogin";
 import RegisterFrom from "./components/RegisterForm";
 
 
 
 const SignUpPage = () => {
     return (
-        <div>
-            <h1>SignUp page here</h1>
+        <div className="mt-12 md:mt-16 lg:mt-24 mb-8 md:mb-10 lg:mb-24">
             <div className="flex justify-center mt-8">
                 <RegisterFrom></RegisterFrom>
-                <hr />
-                <SocialLogin></SocialLogin>
+                {/* <hr /> */}
+                {/* <SocialLogin></SocialLogin> */}
             </div>
         </div>
     );

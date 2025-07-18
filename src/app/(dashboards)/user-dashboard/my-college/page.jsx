@@ -33,9 +33,32 @@ const MyCollegePage = async () => {
 
         // → Or render a prompt
         return (
-            <p>
-                Please <a href="/api/auth/signin">sign in</a> to view your submissions.
-            </p>
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="max-w-md w-full mx-auto p-8 bg-white rounded-lg shadow-lg border border-gray-200">
+                    <div className="text-center">
+                        <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100 mb-4">
+                            <svg className="h-6 w-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                        </div>
+                        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                            Authentication Required
+                        </h2>
+                        <p className="text-gray-600 mb-6">
+                            Please Login to view your college submissions and manage your applications.
+                        </p>
+                        <Link
+                            href="/login"
+                            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200"
+                        >
+                            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                            </svg>
+                            Login
+                        </Link>
+                    </div>
+                </div>
+            </div>
         );
     }
 
@@ -44,7 +67,7 @@ const MyCollegePage = async () => {
 
     // 5) Fetch only that user’s submissions from your Express API
     const res = await fetch(
-        `http://localhost:5000/submissions/by-email/${email}`,
+        `https://book-my-campus-server.onrender.com/submissions/by-email/${email}`,
         { cache: "no-store" }
     );
     if (!res.ok) {

@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import { Star, Users, FileText, Calendar, TrendingUp } from 'lucide-react';
 
 
 
@@ -128,22 +128,133 @@ const CollegesPage = async () => {
     //     },
     // ];
 
+    // Helper function to render stars
+    const renderStars = (rating, totalStars) => {
+        const stars = [];
+        const fullStars = Math.floor(rating);
+
+        for (let i = 0; i < fullStars; i++) {
+            stars.push(<Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />);
+        }
+
+        const remainingStars = totalStars - fullStars;
+        for (let i = 0; i < remainingStars; i++) {
+            stars.push(<Star key={fullStars + i} className="w-4 h-4 text-gray-300" />);
+        }
+
+        return stars;
+    };
+
 
     return (
-        <div>
-            <h2 className='text-5xl font-bold'>Colleges from mongoDB through nodeJS server Here</h2>
-            {
-                colleges.map((d) => {
-                    return (
-                        <div className="space-y-10" key={d._id}>
-                            <Link href={`/colleges/${d._id}`}>
-                                {/* <img src={d.imgSrc} alt="" className="my-10" /> */}
-                                <Image src={d.imgSrc} alt="" className="my-10 w-auto h-auto" width={50} height={50} />
-                            </Link>
-                        </div>
-                    )
-                })
-            }
+        <div className='pt-6 md:pt-3 lg:pt-6 pb-8 md:pb-10 lg:pb-16'>
+            <div className="p-3 sm:p-4 md:p-6 min-h-screen">
+                <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold mb-6 md:mb-8 text-gray-800 text-center sm:text-left'>
+                    Discover your future Campus
+                </h2>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 justify-items-center">
+                    {
+                        colleges.map((d) => {
+                            return (
+                                <div className="bg-white rounded-lg shadow-md overflow-hidden w-full max-w-sm" key={d._id}>
+                                    {/* College Image Placeholder */}
+                                    <div className="h-28 sm:h-32 bg-gray-200 flex items-center justify-center">
+                                        <div className="w-24 h-24 sm:w-28 sm:h-28 bg-gray-300 rounded-full flex items-center justify-center">
+                                            {/* <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gray-400 rounded-full"></div> */}
+                                            <img src={d.imgSrc} alt="" className='w-24 h-24 sm:w-28 sm:h-28 rounded-full' />
+                                        </div>
+                                    </div>
+
+                                    {/* Card Content */}
+                                    <div className="p-3 sm:p-4">
+                                        {/* College Name */}
+                                        <h3 className="font-semibold text-gray-800 mb-2 text-sm sm:text-base leading-tight">
+                                            {d.name}
+                                        </h3>
+
+                                        {/* Rating */}
+                                        <div className="flex items-center mb-3">
+                                            <div className="flex mr-2">
+                                                {renderStars(d.rating, d.stars)}
+                                            </div>
+                                            <span className="text-xs sm:text-sm text-gray-600">
+                                                {d.rating} of {d.stars} Stars
+                                            </span>
+                                        </div>
+
+                                        {/* Statistics Row 1 */}
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 mb-3">
+                                            <div className="flex items-center">
+                                                <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 mr-1" />
+                                                <div>
+                                                    <div className="text-xs text-gray-500">Admission:</div>
+                                                    <div className="text-xs font-medium text-gray-700">
+                                                        {d.applicationPeriod}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <FileText className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 mr-1" />
+                                                <div>
+                                                    <div className="text-xs text-gray-500">Research:</div>
+                                                    <div className="text-xs font-medium text-gray-700">
+                                                        {d.researchCount}+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Statistics Row 2 */}
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 mb-3">
+                                            <div className="flex items-center">
+                                                <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 mr-1" />
+                                                <div>
+                                                    <div className="text-xs text-gray-500">Acceptance:</div>
+                                                    <div className="text-xs font-medium text-gray-700">
+                                                        {d.acceptanceRate}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <Users className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 mr-1" />
+                                                <div>
+                                                    <div className="text-xs text-gray-500">Enrollment:</div>
+                                                    <div className="text-xs font-medium text-gray-700">
+                                                        {d.enrollment.toLocaleString()} Students
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Key Programs */}
+                                        <div className="mb-4">
+                                            <div className="text-xs text-gray-500 mb-2">Key Programs:</div>
+                                            <div className="flex flex-wrap gap-1">
+                                                {d.keyPrograms.map((program, index) => (
+                                                    <span
+                                                        key={index}
+                                                        className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs"
+                                                    >
+                                                        {program}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        {/* Details Button */}
+                                        <Link href={`/colleges/${d._id}`}>
+                                            <button className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-sm font-medium transition-colors touch-manipulation cursor-pointer">
+                                                Details
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            </div>
         </div>
     );
 };

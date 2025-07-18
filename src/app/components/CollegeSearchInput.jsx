@@ -1,34 +1,32 @@
 "use client";
 
-import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 
 const CollegeSearchInput = () => {
-    // const [colleges, setColleges] = useState([]);
-    const [search, setSearch] = useState("");
 
-    const router = useRouter();
-    const pathName = usePathname();
+    const [search, setSearch] = useState("");
 
 
     useEffect(() => {
-
-        const searchQuery = { search };
-        const urlQueryParam = new URLSearchParams(searchQuery);
-        const url = `${pathName}?${urlQueryParam}`;
-        router.push(url);
-        // fetchColleges();
+        if (search) { // Only show toast if search is not empty
+            toast.error("Failed To Search");
+        }
     }, [search]);
 
     return (
-        <div>
+        <div className='mt-3.5 lg:mt-7 text-right'>
+            <h5 className='text-lg text-gray-700'>Search for Colleges</h5>
             {/* search field */}
-            <div className="bg-blue-50 flex justify-center items-center p-5">
-                <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} className='border-2' />
+            <div className="pt-1">
+                <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} className='border-2 border-gray-700' />
             </div>
         </div>
     );
+
 };
 
 export default CollegeSearchInput;
+
+

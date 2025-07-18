@@ -1,8 +1,15 @@
 "use client";
 
-import { IoArrowForwardCircleOutline } from "react-icons/io5";
+import { IoArrowForwardCircleOutline, IoLockClosedOutline, IoMailOutline, IoPersonOutline } from "react-icons/io5";
+import SocialLogin from "../../components/SocialLogin";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function RegisterFrom() {
+
+  const router = useRouter();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -10,7 +17,7 @@ export default function RegisterFrom() {
     const email = form.email.value;
     const password = form.password.value;
     try {
-      const response = await fetch("http://localhost:5000/users", {
+      const response = await fetch("https://book-my-campus-server.onrender.com/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -21,8 +28,11 @@ export default function RegisterFrom() {
       const data = await response.json();
 
       if (response.ok) {
-        alert("Registration successful!");
+        toast.success("Registration successful!")
         form.reset();
+        router.push("/login");
+        toast('Now Please Login')
+
       } else {
         alert(data.message || "Registration failed.");
       }
@@ -34,47 +44,85 @@ export default function RegisterFrom() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-1/2 flex items-center justify-center bg-gray-100"
+      className="flex items-center justify-center min-h-screen"
     >
-      <div className="w-2/3 max-w-md">
-        <h2 className="text-2xl font-bold text-center mb-2 text-[#cbb58b]">
-          book-my-campus
-        </h2>
-        <p className="text-center mb-6">Create Your Account</p>
-        <input
-          type="text"
-          placeholder="Full Name"
-          className="w-full p-2 mb-4 border rounded"
-          name="name"
-        />
-        <input
-          type="email"
-          placeholder="Email Address"
-          className="w-full p-2 mb-4 border rounded"
-          name="email"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full p-2 mb-4 border rounded"
-          name="password"
-        />
-        <button className="w-full bg-[#665c7c] text-white py-2 rounded">
-          Register
-        </button>
-        <p className="text-center mt-4 text-sm">
-          Already have an account?{" "}
-          <a href="/login" className="text-[#cbb58b]">
-            Login here
-          </a>{" "}
-          <br />
-          <a
-            href="/"
-            className="text-[#cbb58b] flex items-center justify-center mt-1"
-          >
-            <IoArrowForwardCircleOutline className="mr-1" /> GoBack
-          </a>
+      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-md">
+        <h2 className="text-3xl font-bold text-center mb-2">Join Us Today!</h2>
+        <p className="text-center text-gray-600 mb-6">
+          Create your account to unlock full features.
         </p>
+
+        {/* Full Name */}
+        <label htmlFor="name" className="block text-sm font-medium mb-1">
+          Full Name
+        </label>
+        <div className="relative mb-4">
+          <IoPersonOutline className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <input
+            id="name"
+            name="name"
+            type="text"
+            placeholder="Your Full Name"
+            className="w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        {/* Email */}
+        <label htmlFor="email" className="block text-sm font-medium mb-1">
+          Email Address
+        </label>
+        <div className="relative mb-4">
+          <IoMailOutline className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="your@example.com"
+            className="w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        {/* Password */}
+        <label htmlFor="password" className="block text-sm font-medium mb-1">
+          Password
+        </label>
+        <div className="relative mb-6">
+          <IoLockClosedOutline className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="••••••••"
+            className="w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        {/* Submit */}
+        <button
+          type="submit"
+          className="w-full py-2 mb-6 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition cursor-pointer"
+        >
+          Sign Up
+        </button>
+
+        <SocialLogin></SocialLogin>
+
+        {/* Already have account */}
+        <div className="text-center text-sm mb-2">
+          Already have an account?{' '}
+          <Link href="/login">
+            <p className="text-blue-500 hover:underline">Login here</p>
+          </Link>
+        </div>
+
+        {/* Go Back */}
+        <div className="text-center">
+          <Link href="/">
+            <p className="inline-flex items-center text-sm text-gray-600 hover:text-gray-800">
+              <IoArrowForwardCircleOutline className="mr-1" /> Go Back
+            </p>
+          </Link>
+        </div>
       </div>
     </form>
   );

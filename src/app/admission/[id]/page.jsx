@@ -127,7 +127,7 @@ const SingleCollegeAdmissionPage = () => {
     };
 
     if (!college) {
-        return <p className="text-center py-10">loading…</p>;
+        return <p className="text-center pb-10 pt-16">loading…</p>;
     }
 
     return (
@@ -267,7 +267,7 @@ const SingleCollegeAdmissionPage = () => {
                         type="file"
                         accept="image/*"
                         onChange={handleChange}
-                        className="w-full"
+                        className="w-full border-2 border-gray-300"
                         required
                     />
                 </div>

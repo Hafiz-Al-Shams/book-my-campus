@@ -13,14 +13,14 @@ export default function Profile() {
 
 
   useEffect(() => {
-      if (status === "unauthenticated") {
-        router.push("/login");
-      }
-    }, [status, router]);
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, [status, router]);
 
   useEffect(() => {
     if (session?.user?.email) {
-      fetch(`http://localhost:5000/user-by-email?email=${session.user.email}`)
+      fetch(`https://book-my-campus-server.onrender.com/user-by-email?email=${session.user.email}`)
         .then((res) => res.json())
         .then((data) => {
           setUserData(data);
@@ -29,7 +29,7 @@ export default function Profile() {
         .catch((err) => console.error("Fetch user error:", err));
     }
   }, [session, status]);
-  
+
   if (status === "loading") {
     return <div className="text-center mt-20">Loading...</div>;
   }
@@ -43,7 +43,7 @@ export default function Profile() {
   };
 
   const handleSave = () => {
-    fetch(`http://localhost:5000/users/update`, {
+    fetch(`https://book-my-campus-server.onrender.com/users/update`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -63,15 +63,15 @@ export default function Profile() {
       });
   };
 
-  if (!userData) return <div className="text-center mt-10">Loading profile...</div>;
+  if (!userData) return <div className="text-center mt-16">loading profile...</div>;
 
   return (
     <div className="max-w-xl mx-auto p-6 mt-10 bg-white shadow-lg rounded-2xl border border-gray-100">
-      <h2 className="text-2xl font-bold mb-6 text-center text-[#665c7c]">My Profile</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-900">Profile</h2>
 
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700">Name:</label>
+          <label className="block text-sm font-medium text-gray-900">Name:</label>
           {editMode ? (
             <input
               name="name"
@@ -80,19 +80,19 @@ export default function Profile() {
               className="mt-1 w-full border px-3 py-2 rounded-lg"
             />
           ) : (
-            <p className="mt-1 text-gray-900">{userData.name}</p>
+            <p className="mt-1 text-gray-800">{userData.name}</p>
           )}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Email:</label>
-          <p className="mt-1 text-gray-900">{userData.email}</p>
+          <label className="block text-sm font-medium text-gray-900">Email:</label>
+          <p className="mt-1 text-gray-800">{userData.email}</p>
         </div>
 
         {userData.provider && (
           <div>
-            <label className="block text-sm font-medium text-gray-700">Provider:</label>
-            <p className="mt-1 text-gray-500 capitalize">{userData.provider}</p>
+            <label className="block text-sm font-medium text-gray-900">Provider:</label>
+            <p className="mt-1 text-gray-800 capitalize">{userData.provider}</p>
           </div>
         )}
       </div>
@@ -102,13 +102,13 @@ export default function Profile() {
           <>
             <button
               onClick={handleSave}
-              className="px-4 py-2 bg-[#665c7c] text-white rounded-lg hover:bg-[#574a66]"
+              className="px-4 py-2 bg-black/80 text-white rounded-lg hover:bg-black/90 cursor-pointer"
             >
               Save
             </button>
             <button
               onClick={() => setEditMode(false)}
-              className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300"
+              className="px-4 py-2 bg-gray-50 text-gray-800 rounded-lg hover:bg-gray-100 cursor-pointer"
             >
               Cancel
             </button>
@@ -116,7 +116,7 @@ export default function Profile() {
         ) : (
           <button
             onClick={() => setEditMode(true)}
-            className="px-4 py-2 bg-[#cbb58b] text-white rounded-lg hover:bg-[#b39c6a]"
+            className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 cursor-pointer"
           >
             Edit
           </button>

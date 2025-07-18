@@ -3,7 +3,7 @@ import AddReviewForm from "../components/AddReviewForm";
 
 // single submission data will be loaded via _id
 export const getSingleSubmission = async (submission_id) => {
-    // const res = await fetch(`http://localhost:5000/submissions/${submission_id}`)
+    // const res = await fetch(`https://book-my-campus-server.onrender.com/submissions/${submission_id}`)
     const res = await fetch(`https://book-my-campus-server.onrender.com/submissions/${submission_id}`)
     const data = await res.json();
     return data;
@@ -34,7 +34,7 @@ const AddSpecificCollegeReview = async ({ params }) => {
     if (singleSubmission) {
         return (
             <>
-                <div>
+                {/* <div>
                     <h1 className="text-center bg-amber-200 text-3xl">submission from MongoDB -- Detail Page</h1>
                     <p className="text-xl">Submission-ID: {id}</p>
                     <p className="text-xl">Candidate Name: {singleSubmission.name}</p>
@@ -46,8 +46,8 @@ const AddSpecificCollegeReview = async ({ params }) => {
                     <p className="text-xl">DOB: {singleSubmission.dob}</p>
                     <img src={singleSubmission.photoUrl} alt="" />
                     <img src={singleSubmission.collegeImgSrc} alt="" />
-                </div>
-                <div className="">
+                </div> */}
+                <div className="mt-10 md:mt-12 lg:mt-16 mb-10 md:mb-16 lg:mb-24">
                     <AddReviewForm submission={singleSubmission} submissionId={id} />
                 </div>
             </>

@@ -42,7 +42,7 @@ const AddReviewForm = ({ submission, submissionId }) => {
         };
 
         try {
-            // const res = await fetch("http://localhost:5000/reviews", {
+            // const res = await fetch("https://book-my-campus-server.onrender.com/reviews", {
             const res = await fetch("https://book-my-campus-server.onrender.com/reviews", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -117,7 +117,7 @@ const AddReviewForm = ({ submission, submissionId }) => {
             <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-[#0095FF] hover:bg-[#0082DE] text-white py-2 rounded transition"
+                className="w-full bg-[#0095FF] hover:bg-[#0082DE] text-white py-2 rounded transition cursor-pointer"
             >
                 {isSubmitting ? "Submitting…" : "Submit Review"}
             </button>

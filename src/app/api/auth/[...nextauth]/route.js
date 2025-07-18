@@ -18,7 +18,7 @@ export const authOptions = {
         const { email, password } = credentials;
 
         try {
-          const res = await fetch(`http://localhost:5000/user-by-email?email=${email}`);
+          const res = await fetch(`https://book-my-campus-server.onrender.com/user-by-email?email=${email}`);
           const user = await res.json();
 
           if (!user || !user.password) {
@@ -70,11 +70,11 @@ export const authOptions = {
     async signIn({ user, account }) {
       if (account?.provider === "google" || account?.provider === "github") {
         try {
-          const checkRes = await fetch(`http://localhost:5000/user-by-email?email=${user.email}`);
+          const checkRes = await fetch(`https://book-my-campus-server.onrender.com/user-by-email?email=${user.email}`);
 
           if (checkRes.status === 404) {
             // User not found, insert new social user
-            await fetch("http://localhost:5000/users/social", {
+            await fetch("https://book-my-campus-server.onrender.com/users/social", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({

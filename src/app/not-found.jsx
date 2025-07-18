@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const NotFoundPage404 = () => {
     return (
-        <div className="flex flex-col items-center justify-center px-4">
+        <div className="flex flex-col items-center justify-center px-4 mt-8 md:mt-12 lg:mt-16">
             <div className="text-center max-w-md">
                 {/* Main heading */}
                 <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold text-gray-800 mb-2.5 md:mb-5 lg:mb-8">
